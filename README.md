@@ -18,7 +18,23 @@ This makes it possible to objectively compare fuzzers.
 - Project: https://github.com/HexHive/magma
 - Bug catalogue: https://hexhive.epfl.ch/magma/docs/bugs.html
 
-## Build Configuration
+## Build
+
+
+You can use the **build_target.sh** script to build the magma targets (bare-metal, ASan, bugs enabled).
+
+ Usage:
+ ```bash
+   ./build_target.sh all                 # build all targets
+   ./build_target.sh libtiff             # build a single target
+   ./build_target.sh libtiff poppler     # build multiple targets
+   ./build_target.sh --list              # list available targets
+   ./build_target.sh clean               # clean all targets
+   ./build_target.sh clean libtiff       # clean specific target(s)
+```
+Artifacts are placed in `out/<target>/`, build logs in `build_logs/<target>.log`.
+
+#### Build Configuration
 
 | Setting | Value |
 |---------|-------|
@@ -43,7 +59,7 @@ This makes it possible to objectively compare fuzzers.
 | **Total**|                             | **121**      |
 
 
-*Targets marked with an (*) did not build successfully.
+>Targets marked with an (*) did not build successfully.
 ---
 
 ## Bugs per Target
@@ -63,16 +79,6 @@ ls targets/<target>/patches/bugs/
 
 ---
 
-## Building
-
-```bash
-
-### Build all targets (ASan, bugs enabled)
-
-./build_all.sh
-```
-
-Artifacts are placed in `out/<target>/`, build logs in `build_logs/<target>.log`.
 
 ## Running a Target
 
