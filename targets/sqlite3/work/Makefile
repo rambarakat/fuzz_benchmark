@@ -15,12 +15,12 @@
 # The toplevel directory of the source tree.  This is the directory
 # that contains this "Makefile.in" and the "configure.in" script.
 #
-TOP = /home/rba/git/doss/fuzz_benchmark/targets/sqlite3/repo
+TOP = /home/rba/git/doss/magma/targets/sqlite3/repo
 
 # C Compiler and options for use in building executables that
 # will run on the platform that is doing the build.
 #
-BCC = gcc  -g -O1 -fsanitize=address -fno-omit-frame-pointer -DSQLITE_MAX_LENGTH=128000000 -DSQLITE_MAX_SQL_LENGTH=128000000 -DSQLITE_MAX_MEMORY=25000000 -DSQLITE_PRINTF_PRECISION_LIMIT=1048576 -DSQLITE_DEBUG=1 -DSQLITE_MAX_PAGE_COUNT=16384
+BCC = clang  -g -O1 -fsanitize=address -fno-omit-frame-pointer -DSQLITE_MAX_LENGTH=128000000 -DSQLITE_MAX_SQL_LENGTH=128000000 -DSQLITE_MAX_MEMORY=25000000 -DSQLITE_PRINTF_PRECISION_LIMIT=1048576 -DSQLITE_DEBUG=1 -DSQLITE_MAX_PAGE_COUNT=16384
 
 # TCC is the C Compile and options for use in building executables that
 # will run on the target platform.  (BCC and TCC are usually the
@@ -28,7 +28,7 @@ BCC = gcc  -g -O1 -fsanitize=address -fno-omit-frame-pointer -DSQLITE_MAX_LENGTH
 # are provide so that these aspects of the build process can be changed
 # on the "make" command-line.  Ex:  "make CC=clang CFLAGS=-fsanitize=undefined"
 #
-CC = gcc
+CC = clang
 CFLAGS =   -g -O1 -fsanitize=address -fno-omit-frame-pointer -DSQLITE_MAX_LENGTH=128000000 -DSQLITE_MAX_SQL_LENGTH=128000000 -DSQLITE_MAX_MEMORY=25000000 -DSQLITE_PRINTF_PRECISION_LIMIT=1048576 -DSQLITE_DEBUG=1 -DSQLITE_MAX_PAGE_COUNT=16384 -DSQLITE_OS_UNIX=1
 TCC = ${CC} ${CFLAGS} -I. -I${TOP}/src -I${TOP}/ext/rtree -I${TOP}/ext/icu
 TCC += -I${TOP}/ext/fts3 -I${TOP}/ext/async -I${TOP}/ext/session
@@ -68,7 +68,7 @@ TCC += -DSQLITE_THREADSAFE=1
 
 # Any target libraries which libsqlite must be linked against
 #
-TLIBS = -lm -lz  -lbz2 -lbrotlidec -lbrotlicommon $(LIBS)
+TLIBS = -lz  $(LIBS)
 
 # Flags controlling use of the in memory btree implementation
 #
@@ -114,11 +114,11 @@ HAVE_TCL =
 # This is the command to use for tclsh - normally just "tclsh", but we may
 # know the specific version we want to use
 #
-TCLSH_CMD = tclsh8.6
+TCLSH_CMD = tclsh
 
 # Where do we want to install the tcl plugin
 #
-TCLLIBDIR = /usr/share/tcltk/tcl8.6/sqlite3
+TCLLIBDIR = $(libdir)/sqlite3
 
 # The suffix used on shared libraries.  Ex:  ".dll", ".so", ".dylib"
 #
@@ -164,7 +164,7 @@ LTINSTALL = $(LIBTOOL) --mode=install $(INSTALL)
 # You should not have to change anything below this line
 ###############################################################################
 
-USE_AMALGAMATION = 1
+USE_AMALGAMATION = 0
 
 # Object files for the SQLite library (non-amalgamation).
 #
