@@ -1,0 +1,16 @@
+--- scripts/pnglibconf.dfa
++++ scripts/pnglibconf.dfa
+@@ -331 +331 @@
+-option WARNINGS
++option WARNINGS disabled
+@@ -365 +365 @@
+-option STDIO
++option STDIO disabled
+@@ -411,2 +411,2 @@
+-setting USER_WIDTH_MAX default        1000000
+-setting USER_HEIGHT_MAX default       1000000
++setting USER_WIDTH_MAX default        0x7fffffff
++setting USER_HEIGHT_MAX default       0x7fffffff
+@@ -521 +521 @@
+-option WRITE enables WRITE_INT_FUNCTIONS
++option WRITE disabled
