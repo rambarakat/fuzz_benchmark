@@ -122,8 +122,9 @@ done
 
 mkdir -p "$LOG_DIR"
 
-$CC $CFLAGS -c "$(pwd)/driver/driver.c" -o "$(pwd)/out/driver.o"
+$CC $CFLAGS -c "$(pwd)/driver/standalone_driver.c" -o "$(pwd)/out/driver.o"
 export LIB_FUZZING_ENGINE="$(pwd)/out/driver.o" 
+
 
 ### === Build loop ===
 declare -a OK_TARGETS FAIL_TARGETS

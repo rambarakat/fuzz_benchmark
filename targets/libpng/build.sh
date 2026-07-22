@@ -23,8 +23,25 @@ make -j$(nproc) libpng16.la
 cp .libs/libpng16.a "$OUT/"
 
 # build libpng_read_fuzzer.
-$CXX $CXXFLAGS -std=c++11 -I. \
-     contrib/oss-fuzz/libpng_read_fuzzer.cc \
-     -o $OUT/libpng_read_fuzzer \
-     $LIB_FUZZING_ENGINE \
-     $LDFLAGS .libs/libpng16.a $LIBS -lz
+#$CXX $CXXFLAGS -std=c++11 -I. \
+#     contrib/oss-fuzz/libpng_read_fuzzer.cc \
+#     -o $OUT/libpng_read_fuzzer \
+#     $LIB_FUZZING_ENGINE \
+#     $LDFLAGS .libs/libpng16.a $LIBS -lz
+
+
+# 1. Target-Harness kompilieren (OHNE -fsanitize=fuzzer!)
+$CXX -c -g -fsanitize=address \
+    -I $TARGET/repo \
+    contrib/oss-fuzz/libpng_read_fuzzer.cc \
+    -o $OUT/harness.o
+
+
+
+# 3. Zusammenlinken mit der Target-Lib + Magma-Instrumentierung
+clang++ -g -fsanitize=address \
+    $LIB_FUZZING_ENGINE \
+    $OUT/harness.o \
+    .libs/libpng16.a \
+    -lz \
+    -o $OUT/libpng_driver
