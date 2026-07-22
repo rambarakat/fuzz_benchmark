@@ -129,7 +129,7 @@ old_postinstall_cmds="chmod 644 \$oldlib~\$RANLIB \$oldlib"
 old_postuninstall_cmds=""
 
 # A C compiler.
-LTCC="clang"
+LTCC="gcc"
 
 # LTCC compiler flags.
 LTCFLAGS=" -g -O1 -fsanitize=address -fno-omit-frame-pointer -DSQLITE_MAX_LENGTH=128000000 -DSQLITE_MAX_SQL_LENGTH=128000000 -DSQLITE_MAX_MEMORY=25000000 -DSQLITE_PRINTF_PRECISION_LIMIT=1048576 -DSQLITE_DEBUG=1 -DSQLITE_MAX_PAGE_COUNT=16384 -DSQLITE_OS_UNIX=1"
@@ -234,7 +234,7 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usr/lib/llvm-21/lib/clang/21 /usr/lib/gcc/x86_64-linux-gnu/15 /usr/lib64 /lib/x86_64-linux-gnu /lib64 /usr/lib/x86_64-linux-gnu /lib /usr/lib"
+sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/15 /usr/lib/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib"
 
 # Run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /usr/lib/wsl/lib /usr/local/lib /usr/local/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib32 "
@@ -254,19 +254,19 @@ striplib="strip --strip-unneeded"
 
 
 # The linker used to build libraries.
-LD="/usr/bin/ld -m elf_x86_64"
+LD="/usr/bin/x86_64-linux-gnu-ld -m elf_x86_64"
 
 # Commands used to build an old-style archive.
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$oldlib"
 
 # A language specific compiler.
-CC="clang"
+CC="gcc"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
+no_builtin_flag=" -fno-builtin"
 
 # How to pass a linker flag through the compiler.
 wl="-Wl,"
